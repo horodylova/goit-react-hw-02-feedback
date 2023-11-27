@@ -1,17 +1,22 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { FcFeedback } from "react-icons/fc";
 import { Container, List, Button, TitleFeedback, Result, StatisticsList } from "./Counter.styled";
 
 
 export class Counter extends React.Component {
-      constructor(props) {
-        super(props);
-        this.state = {
-          good: 0,
-          neutral: 0,
-          bad: 0,
-        };
-      }
+   
+    state = {
+        good: 0,
+        neutral: 0,
+        bad: 0
+      };
+
+      static propTypes = {
+        good: PropTypes.number.isRequired,
+        neutral: PropTypes.number.isRequired,
+        bad: PropTypes.number.isRequired,
+      };
 
   handleButtonClick = (feedbackType) => {
     this.setState((prevState) => {
@@ -23,7 +28,7 @@ export class Counter extends React.Component {
         case 'Bad':
           return { bad: prevState.bad + 1 };
         default:
-          return null; 
+          return this.state; 
       }
     });
   };
@@ -44,9 +49,9 @@ export class Counter extends React.Component {
           Statistics
         </TitleFeedback>
         <StatisticsList>
-          <Result>Good: <span className='counterResult'>{this.state.good}</span></Result>
-          <Result>Neutral: <span className='counterResult'>{this.state.neutral}</span></Result>
-          <Result>Bad: <span className='counterResult'>{this.state.bad}</span></Result>
+          <Result>Good: <span>{this.state.good}</span></Result>
+          <Result>Neutral: <span>{this.state.neutral}</span></Result>
+          <Result>Bad: <span>{this.state.bad}</span></Result>
         </StatisticsList>
       </Container>)
   }
