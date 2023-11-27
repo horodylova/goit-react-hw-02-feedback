@@ -33,7 +33,22 @@ export class Counter extends React.Component {
     });
   };
 
+  countTotalFeedback = () => {
+    return this.state.good + this.state.neutral + this.state.bad;
+  };
+
+  countPositiveFeedbackPercentage = () => {
+    const totalFeedback = this.countTotalFeedback();
+    return totalFeedback > 0
+      ? Math.round((this.state.good / totalFeedback) * 100)
+      : 0;
+  };
+
   render() {
+
+    const totalFeedback = this.countTotalFeedback();
+    const positiveFeedbackPercentage = this.countPositiveFeedbackPercentage();
+
     return (
       <Container>
         <FcFeedback />
@@ -49,9 +64,12 @@ export class Counter extends React.Component {
           Statistics
         </TitleFeedback>
         <StatisticsList>
+        <Result>Total: <span>{totalFeedback}</span></Result>
           <Result>Good: <span>{this.state.good}</span></Result>
           <Result>Neutral: <span>{this.state.neutral}</span></Result>
           <Result>Bad: <span>{this.state.bad}</span></Result>
+          <Result>Positive Feedback: <span>{positiveFeedbackPercentage}%</span></Result>
+
         </StatisticsList>
       </Container>)
   }
