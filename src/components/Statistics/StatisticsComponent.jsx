@@ -15,11 +15,7 @@ const StatisticsComponent = ({
     <Result>Good: <span>{good}</span></Result>
     <Result>Neutral: <span>{neutral}</span></Result>
     <Result>Bad: <span>{bad}</span></Result>
-    {typeof positiveFeedbackPercentage === 'number' && (
-      <Result>
-        Positive Feedback: <span>{positiveFeedbackPercentage}%</span>
-      </Result>
-    )}
+    <Result>Positive Feedback: <span>{positiveFeedbackPercentage}%</span></Result>
   </StatisticsList>
 );
 

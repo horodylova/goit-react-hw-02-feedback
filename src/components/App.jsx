@@ -5,6 +5,7 @@ import { FcFeedback } from "react-icons/fc";
 import Section from './Section/Section';
 import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
 import StatisticsComponent from './Statistics/StatisticsComponent';
+import { Notification } from "./Notification.styled";
 
 class App extends React.Component {
   static propTypes = {
@@ -21,17 +22,10 @@ class App extends React.Component {
 
   handleButtonClick = (feedbackType) => {
     this.setState((prevState) => {
-      switch (feedbackType) {
-        case 'good':
-          return { good: prevState.good + 1 };
-        case 'neutral':
-          return { neutral: prevState.neutral + 1 };
-        case 'bad':
-          return { bad: prevState.bad + 1 };
-        default:
-          return prevState;
-      }
-    });
+      return {
+        [feedbackType]: prevState[feedbackType] + 1,
+      };
+  });
   };
 
   countTotalFeedback = () => {
@@ -46,24 +40,34 @@ class App extends React.Component {
   };
 
   render() {
-  
-      const feedbackOptions = ['Good', 'Neutral', 'Bad'];
+    const totalFeedback = this.countTotalFeedback();
 
       return (
-        <Section>
-          <FcFeedback/>
+        <>
+
+          <Section title="Please leave feedback">
+          <FcFeedback />
           <FeedbackOptions
-            options={feedbackOptions}
+           options={Object.keys(this.state)}
             onLeaveFeedback={this.handleButtonClick}
           />
-          <StatisticsComponent
+        </Section>
+
+        {totalFeedback > 0 ? (
+          <Section title="Statistics">
+            <StatisticsComponent
             good={this.state.good}
             neutral={this.state.neutral}
             bad={this.state.bad}
             totalFeedback={this.countTotalFeedback()}
             positiveFeedbackPercentage={this.countPositiveFeedbackPercentage()}
           />
-        </Section>
+          </Section>
+        ) : (
+          <Notification>No feedback given</Notification>
+        )}
+              </>
+
       );
     }
   }
