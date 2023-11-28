@@ -1,16 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { TitleFeedback  } from"./Section.styled";
+import { Container } from "./Section.styled";
 
-const Section = ({ title, children }) => (
-    <section>
-    <TitleFeedback>{title}</TitleFeedback>
+const Section = ({ children }) => (
+    <Container>
     {children}
-  </section>
+  </Container>
 );
 
 Section.propTypes = {
-  title: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
 };
 

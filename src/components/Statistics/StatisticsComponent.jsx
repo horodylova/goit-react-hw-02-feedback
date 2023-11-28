@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Result, StatisticsList } from "./Statistics.styled";
+import { Result, StatisticsList, Title } from "./Statistics.styled";
 
 const StatisticsComponent = ({
   good,
@@ -9,19 +9,18 @@ const StatisticsComponent = ({
   totalFeedback,
   positiveFeedbackPercentage,
 }) => (
-  <>
-   <StatisticsList>
-      <Result>Total: <span>{totalFeedback}</span></Result>
-      <Result>Good: <span>{good}</span></Result>
-      <Result>Neutral: <span>{neutral}</span></Result>
-      <Result>Bad: <span>{bad}</span></Result>
-      {typeof positiveFeedbackPercentage === 'number' && (
-        <Result>
-          Positive Feedback: <span>{positiveFeedbackPercentage}%</span>
-        </Result>
-      )}
-    </StatisticsList>
-  </>
+  <StatisticsList>
+    <Title>Statistics</Title>
+    <Result>Total: <span>{totalFeedback}</span></Result>
+    <Result>Good: <span>{good}</span></Result>
+    <Result>Neutral: <span>{neutral}</span></Result>
+    <Result>Bad: <span>{bad}</span></Result>
+    {typeof positiveFeedbackPercentage === 'number' && (
+      <Result>
+        Positive Feedback: <span>{positiveFeedbackPercentage}%</span>
+      </Result>
+    )}
+  </StatisticsList>
 );
 
 StatisticsComponent.propTypes = {

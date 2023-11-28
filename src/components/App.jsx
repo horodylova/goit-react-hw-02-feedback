@@ -2,10 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { FcFeedback } from "react-icons/fc";
-import { Container, List } from "./App.styled";
-import Section from './Section';
-import FeedbackOptions from './FeedbackOptions';
-import StatisticsComponent from './StatisticsComponent';
+import Section from './Section/Section';
+import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
+import StatisticsComponent from './Statistics/StatisticsComponent';
 
 class App extends React.Component {
   static propTypes = {
@@ -50,19 +49,13 @@ class App extends React.Component {
   
       const feedbackOptions = ['Good', 'Neutral', 'Bad'];
 
-    return (
-      <Container>
-        <FcFeedback />
-        <Section title="Please leave feedback">
-          <List>
-            <FeedbackOptions
-              options={feedbackOptions}
-              onLeaveFeedback={this.handleButtonClick}
-            />
-          </List>
-        </Section>
-
-        <Section title="Statistics">
+      return (
+        <Section>
+          <FcFeedback/>
+          <FeedbackOptions
+            options={feedbackOptions}
+            onLeaveFeedback={this.handleButtonClick}
+          />
           <StatisticsComponent
             good={this.state.good}
             neutral={this.state.neutral}
@@ -71,10 +64,9 @@ class App extends React.Component {
             positiveFeedbackPercentage={this.countPositiveFeedbackPercentage()}
           />
         </Section>
-      </Container>
-    );
+      );
+    }
   }
-}
 
 export default App;
 
